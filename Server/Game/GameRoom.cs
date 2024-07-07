@@ -141,6 +141,12 @@ namespace Server.Game
                 BroadCast(skill);
 
                 // TODO : 대미지 판정
+                Vector2Int skillPos = player.GetFrontCellPos(info.PosInfo.MoveDir);
+                Player target = _map.Find(skillPos);
+                if (target != null)
+                {
+                    Console.WriteLine("Hit Player !");
+                }
             }
         }
 
