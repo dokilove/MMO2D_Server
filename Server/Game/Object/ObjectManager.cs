@@ -27,7 +27,7 @@ namespace Server.Game
                 if (gameObject.ObjectType == GameObjectType.Player)
                 {
                     _players.Add(gameObject.Id, gameObject as Player);
-                }
+                }       
             }
 
             return gameObject;
