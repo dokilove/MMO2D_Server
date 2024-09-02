@@ -21,7 +21,7 @@ namespace Server.Game
 
         public float Speed
         {
-            get { return Stat.Speed;}
+            get { return Stat.Speed; }
             set { Stat.Speed = value; }
         }
 
@@ -89,7 +89,21 @@ namespace Server.Game
 
         public virtual void OnDead(GameObject attacker)
         {
+            S_Die diePacket = new S_Die();
+            diePacket.ObjectId = Id;
+            diePacket.AttackerId = attacker.Id;
+            Room.BroadCast(diePacket);
 
+            GameRoom room = Room;
+            room.LeaveGame(Id);
+
+            Stat.Hp = Stat.MaxHp;
+            PosInfo.State = CreatureState.Idle;
+            PosInfo.MoveDir = MoveDir.Down;
+            PosInfo.PosX = 0;
+            PosInfo.PosY = 0;
+
+            room.EnterGame(this);
         }
     }
 }
